@@ -50,10 +50,10 @@
 #define SCH_COMM_ENABLE         1    ///< TaskCommunications enabled (0 | 1)
 #define SCH_FP_ENABLED          0      ///< TaskFlightPlan enabled (0 | 1)
 #define SCH_HK_ENABLED          0      ///< TaskHousekeeping enabled (0 | 1)
-#define SCH_RWTEST_ENABLED      0                  ///< taskRWTest enabled (0 | 1)
+#define SCH_RWTEST_ENABLED      0     ///< taskRWTest enabled (0 | 1)
 #define SCH_TEST_ENABLED        0    ///< Set to run tests (0 | 1)
 #define SCH_WDT_PERIOD          10                 ///< CPU watchdog timer period in seconds
-#define SCH_MAX_WDT_TIMER       5000                  ///< Seconds to send wdt_reset command
+#define SCH_MAX_WDT_TIMER       5000               ///< Seconds to send wdt_reset command
 #define SCH_MAX_GND_WDT_TIMER   (3600*48)          ///< Seconds to reset the OBC if the ground watchdog was not clear
 #define SCH_UART_BAUDRATE       (576000)           ///< UART baud rate for serial console
 #define SCH_KISS_UART_BAUDRATE  (500000)           ///< UART baud rate for kiss communication

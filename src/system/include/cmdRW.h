@@ -13,6 +13,7 @@
 
 #include "config.h"
 #include "osDelay.h"
+#include "i2c.h"
 
 #ifdef LINUX
     #include <stdint.h>
@@ -87,7 +88,5 @@ int rw_sample_current(char *fmt, char *params, int nparams);
 int rw_get_speed(char *fmt, char *params, int nparams);
 int rw_get_current(char *fmt, char *params, int nparams);
 int rw_set_speed(char *fmt, char *params, int nparams);
-int i2c_write(uint8_t addr, uint8_t data1, uint8_t data2, uint8_t data3);
-int i2c_read(char* buf);
 
 #endif /* CMD_RW_H */
