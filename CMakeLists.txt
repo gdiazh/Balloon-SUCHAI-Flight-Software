@@ -37,6 +37,7 @@ set(SOURCE_FILES
         src/system/taskWatchdog.c
         src/system/main.c
         src/system/cmdRW.c
+        src/system/cmdMCP9808.c
         )
 
 include_directories(

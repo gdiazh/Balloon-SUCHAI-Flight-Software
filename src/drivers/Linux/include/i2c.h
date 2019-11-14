@@ -21,6 +21,7 @@
 #include <unistd.h>
 
 #define BIuC_ADDR 0x11
+#define MCP9808_I2CADDR_DEFAULT 0x18 ///< I2C address
 
 /**
  * Register reaction whee related (rw) commands
@@ -46,5 +47,40 @@ int i2c_read(char* buf);
  * @param buf registers to save data from slave
  * @return  CMD_OK if executed correctly or CMD_FAIL in case of errors
  */
+
+
+void write16(uint8_t reg, uint16_t value);
+
+/*!
+ *    @brief  Low level 16 bit write procedures
+ *    @param  reg
+ *    @param  value
+ */
+
+
+uint16_t read16(uint8_t reg);
+
+/*!
+ *    @brief  Low level 16 bit read procedure
+ *    @param  reg
+ *    @return value
+ */
+
+int write8(uint8_t reg, uint8_t value);
+
+/*!
+ *    @brief  Low level 8 bit write procedure
+ *    @param  reg
+ *    @param  value
+ */
+
+uint8_t read8(uint8_t reg);
+
+/*!
+ *    @brief  Low level 8 bit read procedure
+ *    @param  reg
+ *    @return value
+ */
+
 
 #endif /* CMD_RW_H */
