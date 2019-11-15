@@ -89,8 +89,8 @@ int i2c_read(char buf[])
  *    @param  reg
  *    @param  value
  */
-void write16(uint8_t reg, uint16_t value) {
-    i2c_write(MCP9808_I2CADDR_DEFAULT, reg, value>>8, value & 0xFF);
+int write16(uint8_t reg, uint16_t value) {
+    return i2c_write(MCP9808_I2CADDR_DEFAULT, reg, value>>8, value & 0xFF);
 }
 
 /*!

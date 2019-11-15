@@ -21,7 +21,7 @@
 #include <unistd.h>
 
 #define BIuC_ADDR 0x11
-#define MCP9808_I2CADDR_DEFAULT 0x18 ///< I2C address
+#define MCP9808_I2CADDR_DEFAULT 0x1f ///< I2C address
 
 /**
  * Register reaction whee related (rw) commands
@@ -49,7 +49,7 @@ int i2c_read(char* buf);
  */
 
 
-void write16(uint8_t reg, uint16_t value);
+int write16(uint8_t reg, uint16_t value);
 
 /*!
  *    @brief  Low level 16 bit write procedures

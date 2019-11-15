@@ -49,12 +49,12 @@
 
 void cmd_mcp9808_init(void);
 int mcp9808_init(char *fmt, char *params, int nparams);
-float mcp9808_readTempC();
-float mcp9808_readTempF();
+int mcp9808_readTempC(char *fmt, char *params, int nparams);
+int mcp9808_readTempF(char *fmt, char *params, int nparams);
 void mcp9808_shutdown_wake(uint8_t sw);
 void mcp9808_shutdown();
-void mcp9808_wake();
-uint8_t mcp9808_getResolution();
-void mcp9808_setResolution(uint8_t value);
+int mcp9808_wake(char *fmt, char *params, int nparams);
+int mcp9808_getResolution(char *fmt, char *params, int nparams);
+int mcp9808_setResolution(char *fmt, char *params, int nparams);
 
 #endif /* CMD_RW_H */
