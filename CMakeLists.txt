@@ -15,6 +15,8 @@ set(SOURCE_FILES
         src/os/Linux/osThread.c
         src/os/Linux/pthread_queue.c
         src/drivers/Linux/i2c.c
+        src/drivers/Linux/bmp3.c
+        src/drivers/Linux/bmp3_interface.c
         src/system/cmdDRP.c
         src/system/cmdOBC.c
         src/system/cmdCOM.c
@@ -50,7 +52,7 @@ include_directories(
 
 link_directories(src/drivers/Linux/libcsp/lib)
 
-link_libraries(-lpthread -lsqlite3 -lcsp -lzmq -lpq)
+link_libraries(-lpthread -lsqlite3 -lcsp -lzmq -lpq -lm)
 
 # Use pthread_setname_np included in <features.h>
 add_definitions(-D_GNU_SOURCE)
