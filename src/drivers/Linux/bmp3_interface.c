@@ -34,8 +34,8 @@
 char *I2CDeviceName = (char*)"/dev/i2c-1";
 
 // Our hardware interface functions
-static int8_t bmp3_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
-static int8_t bmp3_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
+//static int8_t bmp3_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
+//static int8_t bmp3_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
 static void delay_msec(uint32_t ms);
 
 /***************************************************************************
@@ -75,28 +75,28 @@ int bmp3_begin(uint8_t addr) {
     int8_t rslt = BMP3_OK;
     rslt = bmp3_init(&the_sensor);
 #ifdef BMP3XX_DEBUG
-    LOGI("bmp3_interface", "Begin BMP3 Result: %d", rslt);
+    printf("bmp3_interface Begin BMP3 Result: %d\n", rslt);
 #endif
 
     if (rslt != BMP3_OK)
         return 0;
 
 #ifdef BMP3XX_DEBUG
-  LOGI("bmp3_interface", "T1 = %d", the_sensor.calib_data.reg_calib_data.par_t1);
-  LOGI("bmp3_interface", "T2 = %d", the_sensor.calib_data.reg_calib_data.par_t2);
-  LOGI("bmp3_interface", "T3 = %d", the_sensor.calib_data.reg_calib_data.par_t3);
-  LOGI("bmp3_interface", "P1 = %d", the_sensor.calib_data.reg_calib_data.par_p1);
-  LOGI("bmp3_interface", "P2 = %d", the_sensor.calib_data.reg_calib_data.par_p2);
-  LOGI("bmp3_interface", "P3 = %d", the_sensor.calib_data.reg_calib_data.par_p3);
-  LOGI("bmp3_interface", "P4 = %d", the_sensor.calib_data.reg_calib_data.par_p4);
-  LOGI("bmp3_interface", "P5 = %d", the_sensor.calib_data.reg_calib_data.par_p5);
-  LOGI("bmp3_interface", "P6 = %d", the_sensor.calib_data.reg_calib_data.par_p6);
-  LOGI("bmp3_interface", "P7 = %d", the_sensor.calib_data.reg_calib_data.par_p7);
-  LOGI("bmp3_interface", "P8 = %d", the_sensor.calib_data.reg_calib_data.par_p8);
-  LOGI("bmp3_interface", "P9 = %d", the_sensor.calib_data.reg_calib_data.par_p9);
-  LOGI("bmp3_interface", "P10 = %d", the_sensor.calib_data.reg_calib_data.par_p10);
-  LOGI("bmp3_interface", "P11 = %d", the_sensor.calib_data.reg_calib_data.par_p11);
-  //LOGI("bmp3_interface", T lin = %d", the_sensor.calib_data.reg_calib_data.t_lin);
+  printf("bmp3_interface T1 = %d\n", the_sensor.calib_data.reg_calib_data.par_t1);
+  printf("bmp3_interface T2 = %d\n", the_sensor.calib_data.reg_calib_data.par_t2);
+  printf("bmp3_interface T3 = %d\n", the_sensor.calib_data.reg_calib_data.par_t3);
+  printf("bmp3_interface P1 = %d\n", the_sensor.calib_data.reg_calib_data.par_p1);
+  printf("bmp3_interface P2 = %d\n", the_sensor.calib_data.reg_calib_data.par_p2);
+  printf("bmp3_interface P3 = %d\n", the_sensor.calib_data.reg_calib_data.par_p3);
+  printf("bmp3_interface P4 = %d\n", the_sensor.calib_data.reg_calib_data.par_p4);
+  printf("bmp3_interface P5 = %d\n", the_sensor.calib_data.reg_calib_data.par_p5);
+  printf("bmp3_interface P6 = %d\n", the_sensor.calib_data.reg_calib_data.par_p6);
+  printf("bmp3_interface P7 = %d\n", the_sensor.calib_data.reg_calib_data.par_p7);
+  printf("bmp3_interface P8 = %d\n", the_sensor.calib_data.reg_calib_data.par_p8);
+  printf("bmp3_interface P9 = %d\n", the_sensor.calib_data.reg_calib_data.par_p9);
+  printf("bmp3_interface P10 = %d\n", the_sensor.calib_data.reg_calib_data.par_p10);
+  printf("bmp3_interface P11 = %d\n", the_sensor.calib_data.reg_calib_data.par_p11);
+  //printf("bmp3_interface T  = %d\n", the_sensor.calib_data.reg_calib_data.t_lin);
 #endif
 
     bmp3_setTemperatureOversampling(BMP3_NO_OVERSAMPLING);
@@ -201,7 +201,7 @@ int bmp3_performReading(void) {
 
     /* Set the desired sensor configuration */
 #ifdef BMP3XX_DEBUG
-    LOGI("bmp3_interface", "Setting sensor settings");
+    printf("bmp3_interface Setting sensor settings\n");
 #endif
     rslt = bmp3_set_sensor_settings(settings_sel, &the_sensor);
     if (rslt != BMP3_OK)
@@ -210,7 +210,7 @@ int bmp3_performReading(void) {
     /* Set the power mode */
     the_sensor.settings.op_mode = BMP3_FORCED_MODE;
 #ifdef BMP3XX_DEBUG
-    LOGI("bmp3_interface", "Setting power mode");
+    printf("bmp3_interface Setting power mode\n");
 #endif
     rslt = bmp3_set_op_mode(&the_sensor);
     if (rslt != BMP3_OK)
@@ -315,7 +315,7 @@ int bmp3_setOutputDataRate(uint8_t odr) {
 
 
 static void delay_msec(uint32_t ms){
-    osDelay(ms);
+    usleep(ms*1000);
 }
 
 /**************************************************************************/
@@ -325,16 +325,12 @@ static void delay_msec(uint32_t ms){
 /**************************************************************************/
 int8_t bmp3_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
-    #ifdef BMP3XX_DEBUG
-    //        LOGI("\tI2C $%d <= ", reg_addr);
-    #endif
     int i2cHandle;
-    //size_t buf_len;
     uint8_t buf_len;
     if ((i2cHandle = open(I2CDeviceName, O_RDWR)) < 0)
     {
         printf("error opening I2C\n");
-        return 0;
+        return 1;
     }
     else
     {
@@ -342,7 +338,7 @@ int8_t bmp3_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
             printf("Error at ioctl\n");
             // Close the i2c device bus
             close(*I2CDeviceName);
-            return 0;
+            return 1;
         }
         else
         {
@@ -350,20 +346,25 @@ int8_t bmp3_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
             memset(reg_data, 0, len);
             char wbuf[1];
             wbuf[0] = reg_addr;
-            int res_tmp = write(i2cHandle, wbuf, sizeof(wbuf));
+            int res_tmp = write(i2cHandle, wbuf, 1);
             uint8_t bytes_r = read(i2cHandle, reg_data, len);
+            #ifdef BMP3XX_DEBUG
+                printf("[bmp3 i2c read] res_tmp: %d\n", res_tmp);
+                printf("bmp3_i2c_read: [");
+                for (int i = 0; i < len; i++) {
+                    printf("%d,", reg_data[i]);
+                }
+                printf("]\n");
+            #endif
             if (bytes_r != len)
             {
                 perror("Failed to read from the i2c bus");
-                return 0;
+                return 1;
             }
-            /*printf("buf[0] = %d\n", buf[0]);
-            printf("buf[1] = %d\n", buf[1]);
-            printf("buf[2] = %d\n", buf[2]);*/
         }
         // Close the i2c device bus
         close(*I2CDeviceName);
-        return 1;
+        return 0;
     }
 }
 
@@ -374,33 +375,51 @@ int8_t bmp3_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
 /**************************************************************************/
 int8_t bmp3_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
-    #ifdef BMP3XX_DEBUG
-    //        LOGI("\tI2C $%d <= ", reg_addr);
-    #endif
-        int i2cHandle;
-        if ((i2cHandle = open(I2CDeviceName, O_RDWR)) < 0)
+    int i2cHandle;
+    int res_tmp;
+    int res_tmp2;
+    if ((i2cHandle = open(I2CDeviceName, O_RDWR)) < 0)
+    {
+        printf("error opening I2C\n");
+        return 1;
+    }
+    else
+    {
+        if (ioctl(i2cHandle, I2C_SLAVE, dev_id) < 0)
         {
-            printf("error opening I2C\n");
-            return 0;
+            printf("Error at ioctl\n");
+            // Close the i2c device bus
+            close(*I2CDeviceName);
+            return 1;
         }
         else
         {
-            if (ioctl(i2cHandle, I2C_SLAVE, dev_id) < 0)
-            {
-                printf("Error at ioctl\n");
-                // Close the i2c device bus
-                close(*I2CDeviceName);
-                return 0;
-            }
-            else
-            {
-                char wbuf[1];
-                wbuf[0] = reg_addr;
-                int res_tmp = write(i2cHandle, wbuf, sizeof(wbuf));
-                int res_tmp2 = write(i2cHandle, reg_data, sizeof(reg_data));
+            uint8_t wbuf[len+1];
+            #ifdef BMP3XX_DEBUG
+                printf("data to write: [");
+                for (int i = 0; i < len; i++) {
+                    printf("%d,", reg_data[i]);
+                }
+                printf("]\n");
+            #endif
+            memcpy(wbuf, &reg_addr, sizeof(uint8_t));
+            memcpy(wbuf+1, reg_data, len*sizeof(uint8_t));
+            res_tmp2 = write(i2cHandle, wbuf, len+1);
+            #ifdef BMP3XX_DEBUG
+                printf("addr+data to write: [");
+                for (int i = 0; i < len+1; i++) {
+                    printf("%d,", wbuf[i]);
+                }
+                printf("]\n");
+                printf("[bmp3 i2c write] res_tmp2: %d\n", res_tmp2);
+            #endif
+            if (res_tmp2 != len+1) {
+                printf("[bmp3_i2c]Fail to write %d bytes\n", len - res_tmp2);
+                return 1;
             }
         }
-        // Close the i2c device bus
-        close(*I2CDeviceName);
-        return 1;
+    }
+    // Close the i2c device bus
+    close(*I2CDeviceName);
+    return 0;
 }

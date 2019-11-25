@@ -1223,6 +1223,8 @@ int8_t bmp3_get_sensor_data(uint8_t sensor_comp, struct bmp3_data *comp_data, st
             parse_sensor_data(reg_data, &uncomp_data);
             /* Compensate the pressure/temperature/both data read
                from the sensor */
+//            printf("Uncompensated Temperature = %d *C\n", uncomp_data.temperature);
+//            printf("Uncompensated Pressure = %d hPa\n", uncomp_data.pressure);
             rslt = compensate_data(sensor_comp, &uncomp_data, comp_data, &dev->calib_data);
         }
     } else {
@@ -1644,8 +1646,10 @@ static int8_t set_pwr_ctrl_settings(uint32_t desired_settings, const struct bmp3
             reg_data = BMP3_SET_BITS(reg_data, BMP3_TEMP_EN, dev->settings.temp_en);
         }
         /* Write the power control settings in the register */
+//        printf("[set_pwr_ctrl_settings] reg_data = %d\n", reg_data);
         rslt = bmp3_set_regs(&reg_addr, &reg_data, 1, dev);
     }
+    rslt = bmp3_get_regs(reg_addr, &reg_data, 1, dev);
 
     return rslt;
 }

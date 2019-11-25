@@ -42,7 +42,7 @@ int i2c_write(uint8_t addr, uint8_t data1, uint8_t data2, uint8_t data3)
             wbuf[1] = data2;
             wbuf[2] = data3;
             int res_tmp = write(i2cHandle, wbuf, sizeof(wbuf));
-            //printf("write_fd_res: %d", res_tmp);
+            printf("write_fd_res: %d\n", res_tmp);
         }
         // Close the i2c device bus
         close(*deviceName);
@@ -118,6 +118,7 @@ uint16_t read16(uint8_t reg) {
             memset(buf, 0, buf_len);
             char wbuf[1] = {reg};
             int res_tmp = write(i2cHandle, wbuf, 1);
+//            printf("[bmp3 i2c read] res_tmp: %d\n", res_tmp);
             uint8_t bytes_r = read(i2cHandle, buf, buf_len);
             if (bytes_r != buf_len)
             {

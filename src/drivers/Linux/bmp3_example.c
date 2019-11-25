@@ -38,14 +38,12 @@ int main()
     while (1) {
         if (!bmp3_performReading()) {
             printf("Failed to perform reading :(\n");
-            return;
+            return 1;
         }
         printf("Temperature = %f *C\n", bmp3_temperature);
-
         printf("Pressure = %f hPa\n", bmp3_pressure / 100.0);
-
         printf("Approx. Altitude = %f m\n", bmp3_readAltitude(SEALEVELPRESSURE_HPA));
-
+        printf("----------------------------------------\n");
         usleep(2000e3);
     }
 }

@@ -56,6 +56,7 @@
 
 /* Header includes */
 #include "bmp3_defs.h"
+#include <stdio.h>
 
 /*!
  *  @brief This API is the entry point.

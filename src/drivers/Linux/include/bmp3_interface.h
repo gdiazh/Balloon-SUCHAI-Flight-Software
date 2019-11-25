@@ -24,8 +24,10 @@
 
 #include "bmp3.h"
 #include "i2c.h"
+#include <stdio.h>
+#include <string.h>
 #include "math.h"
-#include "osDelay.h"
+//#include "osDelay.h"
 
 
 
@@ -62,5 +64,8 @@ int32_t bmp3_sensorID;
 unsigned long bmp3_meas_end;
 
 struct bmp3_dev the_sensor;
+
+static int8_t bmp3_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
+static int8_t bmp3_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len);
 
 #endif

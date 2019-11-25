@@ -11,7 +11,7 @@
 #ifndef I2C_H
 #define I2C_H
 
-#include "osDelay.h"
+//#include "osDelay.h"
 
 #include <stdint.h>
 #include <fcntl.h>
@@ -19,6 +19,8 @@
 #include <linux/i2c-dev.h>
 #include <errno.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
 #define BIuC_ADDR 0x11
 #define MCP9808_I2CADDR_DEFAULT 0x1f ///< I2C address
